@@ -1,0 +1,57 @@
+package main
+
+import ("fmt"
+	"os"
+)
+
+// func main() {
+// 	if len(os.Args) != 3 {
+// 		return
+// 	}
+// 	str1 := os.Args[1]
+// 	str2 := os.Args[2]
+
+// 	found := make(map[rune]bool)
+// 	for _, char := range str1 {
+// 		found[char] = true
+
+// 		result := ""
+// 		for _, char := range str2 {
+// 			if found[char] {
+// 				result += string(char)
+// 				found[char] = false
+// 			}
+// 		}
+// 		fmt.Print(result)
+// 		//fmt.Print("\n")
+// 	}
+
+// }
+func main() {
+    if len(os.Args) != 3 {
+        return
+    }
+    str1 := os.Args[1]
+    str2 := os.Args[2]
+
+    seen := make(map[rune]bool) // Track characters already printed
+    result := ""
+
+    // Iterate through str1 and build a set of unique characters
+    for _, char := range str1 {
+        if !seen[char] {
+            seen[char] = true
+            result += string(char)
+        }
+    }
+
+    // Iterate through str2 and print only common characters not yet printed
+    for _, char := range str2 {
+        if seen[char] {
+            fmt.Print(string(char))
+            seen[char] = false // Mark printed to avoid duplicates
+        }
+    }
+    fmt.Println() // Add newline after all common characters are printed
+}
+
