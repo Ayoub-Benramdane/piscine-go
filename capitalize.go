@@ -1,31 +1,24 @@
 package piscine
 
 func Capitalize(s string) string {
-	result := make([]byte, len(s))
-
+	result := ""
 	isFirst := true
-
 	for i := 0; i < len(s); i++ {
-		char := s[i]
-		if isFirst && ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z') || (char >= '0' && char <= '9')) {
-			if char >= 'a' && char <= 'z' {
-				result[i] = char - 'a' + 'A'
+		if isFirst {
+			if s[i] >= 'a' && s[i] <= 'z' {
+				result += string(s[i] - 32)
 			} else {
-				result[i] = char
+				result += string(s[i])
 			}
 			isFirst = false
+		} else if s[i] >= 'A' && s[i] <= 'Z' {
+			result += string(s[i] + 32)
 		} else {
-			if char >= 'A' && char <= 'Z' {
-				result[i] = char - 'A' + 'a'
-			} else {
-				result[i] = char
-			}
+			result += string(s[i])
 		}
-
-		if char < '0' || (char > '9' && char < 'A') || (char > 'Z' && char < 'a') || char > 'z' {
-			result[i] = char
+		if s[i] < '0' || (s[i] > '9' && s[i] < 'A') || (s[i] > 'Z' && s[i] < 'a') || s[i] > 'z' {
 			isFirst = true
 		}
 	}
-	return string(result)
+	return result
 }
