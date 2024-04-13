@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
 )
 
 //---------  Quest II  ---------//
@@ -1023,4 +1025,71 @@ func Split(s, sep string) []string {
 }
 */
 
-/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 */
+//---------  Quest VIII  ---------//
+
+/* Q8-1
+func printStr(s string) {
+	for _, r := range s {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
+}
+
+func isEven(nbr int) bool {
+	if nbr%2 == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+func main() {
+	EvenMsg := "I have an even number of arguments"
+	OddMsg := "I have an odd number of arguments"
+	if isEven(len(os.Args[1:])) {
+		printStr(EvenMsg)
+	} else {
+		printStr(OddMsg)
+	}
+}
+*/
+
+/* Q8-2
+type point struct {
+	x int
+	y int
+}
+
+func setPoint(ptr *point) {
+	ptr.x = 42
+	ptr.y = 21
+}
+
+func main() {
+	points := &point{}
+
+	setPoint(points)
+
+	fmt.Printf("x = %d, y = %d\n", points.x, points.y)
+}
+*/
+
+/* Q8-3
+func main() {
+	if len(os.Args) == 1 {
+		fmt.Println("File name missing")
+		return
+	} else if len(os.Args) > 2 {
+		fmt.Println("Too many argiments")
+		return
+	}
+	content, _ := ioutil.ReadFile(os.Args[1])
+	fmt.Println(string(content))
+}
+*/
+
+//---------  Quest VIII  ---------//
+
+
+
+/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 */
