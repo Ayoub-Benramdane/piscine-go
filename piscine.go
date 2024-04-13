@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 //---------  Quest II  ---------//
 
 /* Q2-1
@@ -1103,6 +1101,7 @@ func ForEach(f func(int), a []int) {
 }
 */
 
+/* Q9-2
 func main() {
 	a := []int{1, 2, 3, 4, 5, 6}
 	result := Map(IsPrime, a)
@@ -1110,11 +1109,56 @@ func main() {
 }
 
 func IsPrime(n int) bool {
-	
+	if n < 2 {
+		return false
+	} else if n > 2 {
+		for i := 2; i < n; i++ {
+			if n%i == 0 {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 func Map(f func(int) bool, a []int) []bool {
-
+	res := []bool{}
+	for _, c := range a {
+		res = append(res, f(c))
+	}
+	return res
 }
+*/
+
+/* Q9-3
+func main() {
+	a1 := []string{"Hello", "how", "are", "you"}
+	a2 := []string{"This", "is", "4", "you"}
+
+	result1 := Any(IsNumeric, a1)
+	result2 := Any(IsNumeric, a2)
+
+	fmt.Println(result1)
+	fmt.Println(result2)
+}
+
+func IsNumeric(s string) bool {
+	for _, c := range s {
+		if c >= '0' && c <= '9' {
+			return true
+		}
+	}
+	return false
+}
+
+func Any(f func(string) bool, a []string) bool {
+	for _, c := range a {
+		if f(c) {
+			return true
+		}
+	}
+	return false
+}
+*/
 
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 */
