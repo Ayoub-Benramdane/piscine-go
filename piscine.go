@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"os"
-)
+import "fmt"
 
 //---------  Quest II  ---------//
 
@@ -1090,6 +1086,35 @@ func main() {
 
 //---------  Quest VIII  ---------//
 
+/* Q9-1
+func main() {
+	a := []int{1, 2, 3, 4, 5, 6}
+	ForEach(PrintNbr, a)
+}
 
+func PrintNbr(n int) {
+	fmt.Print(n)
+}
+
+func ForEach(f func(int), a []int) {
+	for _, c := range a {
+		f(c)
+	}
+}
+*/
+
+func main() {
+	a := []int{1, 2, 3, 4, 5, 6}
+	result := Map(IsPrime, a)
+	fmt.Println(result)
+}
+
+func IsPrime(n int) bool {
+	
+}
+
+func Map(f func(int) bool, a []int) []bool {
+
+}
 
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 */
