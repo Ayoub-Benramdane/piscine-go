@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 //---------  Quest II  ---------//
 
 /* Q2-1
@@ -1019,4 +1023,540 @@ func Split(s, sep string) []string {
 }
 */
 
-/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 */
+//---------  Quest VIII  ---------//
+
+/* Q8-1
+func printStr(s string) {
+	for _, r := range s {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
+}
+
+func isEven(nbr int) bool {
+	if nbr%2 == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+func main() {
+	lengthOfArg := len(os.Args[1:])
+	EvenMsg := "I have an even number of arguments"
+	OddMsg := "I have an odd number of arguments"
+	if isEven(lengthOfArg) {
+		printStr(EvenMsg)
+	} else {
+		printStr(OddMsg)
+	}
+}
+*/
+
+/* Q8-2
+type point struct {
+	x int
+	y int
+}
+
+func setPoint(ptr *point) {
+	ptr.x = 42
+	ptr.y = 21
+}
+
+func main() {
+	points := &point{}
+
+	setPoint(points)
+
+	fmt.Printf("x = %d, y = %d\n", points.x, points.y)
+}
+*/
+
+/* Q8-3
+func main() {
+	args := os.Args[1:]
+	if len(args) < 1 {
+		fmt.Println("File name missing")
+	} else if len(args) > 1 {
+		fmt.Println("Too many arguments")
+	} else {
+		content, _ := ioutil.ReadFile(args[0])
+		fmt.Println(string(content))
+	}
+}
+*/
+
+//---------  Quest IX  ---------//
+
+/* Q9-1
+func main() {
+	a := []int{1, 2, 3, 4, 5, 6}
+	ForEach(PrintNbr, a)
+}
+
+func PrintNbr(n int) {
+	fmt.Print(n)
+}
+
+func ForEach(f func(int), a []int) {
+	for i := 0; i < len(a); i++ {
+		f(a[i])
+	}
+}
+*/
+
+/* Q9-2
+func main() {
+	a := []int{1, 2, 3, 4, 5, 6}
+	result := Map(IsPrime, a)
+	fmt.Println(result)
+}
+
+func IsPrime(n int) bool {
+	if n <= 1 {
+		return false
+	}
+	for i := 2; i < n; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func Map(f func(int) bool, a []int) []bool {
+	res := []bool{}
+	for i := 0; i < len(a); i++ {
+		res = append(res, f(a[i]))
+	}
+	return res
+}
+*/
+
+/* Q9-3
+func main() {
+	a1 := []string{"Hello", "how", "are", "you"}
+	a2 := []string{"This", "is", "4", "you"}
+
+	result1 := Any(IsNumeric, a1)
+	result2 := Any(IsNumeric, a2)
+
+	fmt.Println(result1)
+	fmt.Println(result2)
+}
+
+func IsNumeric(s string) bool {
+	for _, c := range s {
+		if c <= '0' || c >= '9' {
+			return false
+		}
+	}
+	return true
+}
+
+func Any(f func(string) bool, a []string) bool {
+	for i := 0; i < len(a); i++ {
+		if IsNumeric(a[i]) {
+			return true
+		}
+	}
+	return false
+}
+*/
+
+/* Q9-4
+func main() {
+	tab1 := []string{"Hello", "how", "are", "you"}
+	tab2 := []string{"This","1", "is", "4", "you"}
+	answer1 := CountIf(IsNumeric, tab1)
+	answer2 := CountIf(IsNumeric, tab2)
+	fmt.Println(answer1)
+	fmt.Println(answer2)
+}
+
+func IsNumeric(s string) bool {
+	for _, c := range s {
+		if c <= '0' || c >= '9' {
+			return false
+		}
+	}
+	return true
+}
+
+func CountIf(f func(string) bool, tab []string) int {
+	count := 0
+	for i := 0; i < len(tab); i++ {
+		if IsNumeric(tab[i]) {
+			count++
+		}
+	}
+	return count
+}
+*/
+
+/* Q9-5
+func main() {
+	a1 := []int{0, 1, 2, 3, 4, 5}
+	a2 := []int{0, 2, 1, 3}
+
+	result1 := IsSorted(f, a1)
+	result2 := IsSorted(f, a2)
+
+	fmt.Println(result1)
+	fmt.Println(result2)
+}
+
+func f(a, b int) int {
+	if a < b {
+		return -1
+	}
+	return 1
+}
+
+func IsSorted(f func(a, b int) int, a []int) bool {
+	if f(a[0], a[1]) >= 0 {
+		for i := 0; i < len(a)-1; i++ {
+			if f(a[i], a[i+1]) < 0 {
+				return false
+			}
+		}
+	} else {
+		for i := 0; i < len(a)-1; i++ {
+			if f(a[i], a[i+1]) > 0 {
+				return false
+			}
+		}
+	}
+	return true
+}
+*/
+
+/* Q9-6
+func main() {
+	if len(os.Args[1:]) != 3 {
+		return
+	}
+	arg1, err := strconv.Atoi(os.Args[1])
+	arg2 := os.Args[2]
+	arg3, err1 := strconv.Atoi(os.Args[3])
+	res := 0
+	resFinal := ""
+	if err != nil || err1 != nil {
+		return
+	}
+	for i := 0; i < len(arg2); i++ {
+		if len(arg2) != 1 && arg2[i] != '+' && arg2[i] != '-' && arg2[i] != '*' && arg2[i] != '/' && arg2[i] != '%' {
+			return
+		}
+		if arg2[i] == '+' {
+			res = arg1 + arg3
+		} else if arg2[i] == '-' {
+			res = arg1 - arg3
+		} else if arg2[i] == '*' {
+			res = arg1 * arg3
+		} else if arg2[i] == '/' {
+			if arg3 == 0 {
+				os.Stdout.Write([]byte("No division by 0"))
+				return
+			}
+			res = arg1 / arg3
+		} else if arg2[i] == '%' {
+			if arg3 == 0 {
+				os.Stdout.Write([]byte("No modulo by 0"))
+				return
+			}
+			res = arg1 % arg3
+		}
+	}
+	resFinal = strconv.Itoa(res)
+	os.Stdout.Write([]byte(resFinal))
+}
+*/
+
+//---------  Quest X  ---------//
+
+/* Q10-1
+func main() {
+	result := Rot14("Hello! How are You?")
+
+	for _, r := range result {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
+}
+
+func Rot14(s string) string {
+	res := ""
+	for _, c := range s {
+		if c >= 'a' && c <= 'l' || c >= 'A' && c <= 'L' {
+			c += 14
+		} else if c >= 'm' && c <= 'z' || c >= 'M' && c <= 'Z' {
+			c -= 12
+		}
+		res += string(c)
+	}
+	return res
+}
+*/
+
+/* Q10-2
+func main() {
+	DescendComb()
+}
+
+func DescendComb() {
+	for i := '9'; i >= '0'; i-- {
+		for j := '9'; j >= '0'; j-- {
+			for k := '9'; k >= '0'; k-- {
+				for l := '9'; l >= '0'; l-- {
+					if i >= k && j > l {
+						if i != '0' || j != '1' || k != '0' || l != '0' {
+							z01.PrintRune(i)
+							z01.PrintRune(j)
+							z01.PrintRune(' ')
+							z01.PrintRune(k)
+							z01.PrintRune(l)
+							z01.PrintRune(',')
+							z01.PrintRune(' ')
+						} else {
+							z01.PrintRune(i)
+							z01.PrintRune(j)
+							z01.PrintRune(' ')
+							z01.PrintRune(k)
+							z01.PrintRune(l)
+						}
+					}
+				}
+			}
+		}
+	}
+}
+*/
+
+/* Q10-3
+func main() {
+	a := []int{1, 2, 3, 1, 2, 3, 4}
+	unmatch := Unmatch(a)
+	fmt.Println(unmatch)
+}
+
+func Unmatch(a []int) int {
+	tab := [10]int{}
+	for _, c := range a {
+		tab[c]++
+	}
+	for i, c := range tab {
+		if c%2 != 0 {
+			return i
+		}
+	}
+	return -1
+}
+*/
+
+/* Q10-4
+func main() {
+	fmt.Println(FoodDeliveryTime("burger"))
+	fmt.Println(FoodDeliveryTime("chips"))
+	fmt.Println(FoodDeliveryTime("nuggets"))
+	fmt.Println(FoodDeliveryTime("burger") + FoodDeliveryTime("chips") + FoodDeliveryTime("nuggets"))
+}
+
+type food struct {
+	preptime int
+}
+
+
+func FoodDeliveryTime(order string) int {
+	var x food
+	x.preptime = 404
+	if order == "burger" {
+		x.preptime = 15
+	} else if order == "chips" {
+		x.preptime = 10
+	} else if order == "nuggets" {
+		x.preptime = 12
+	}
+	return x.preptime
+}
+*/
+
+/* Q10-5
+func main() {
+	steps := CollatzCountdown(12)
+	fmt.Println(steps)
+}
+
+func CollatzCountdown(start int) int {
+	count := 0
+	if start <= 0 {
+		return -1
+	}
+	for start > 1 {
+		if start%2 == 0 {
+			start /= 2
+		} else if start %2 == 1 {
+			start = start*3 + 1
+		}
+		count++
+	}
+	return count
+}
+*/
+
+/* Q10-6
+func main() {
+	middle := Abort(2, 3, 8, 5, 7)
+	fmt.Println(middle)
+}
+
+func Abort(a, b, c, d, e int) int {
+	liste := []int{a, b, c, d, e}
+	for i := 0; i< len(liste); i++ {
+		for j := i+1; j< len(liste); j++ {
+			if liste[i] > liste[j] {
+				liste[i], liste[j] = liste[j], liste[i]
+			}
+		}
+	}
+	return liste[2]
+}
+*/
+
+/* Q10-7
+func main() {
+	summary := "Burger Water Carrot  Coffee Water Water Chips Carrot Carrot Burger Carrot Water"
+	for index, element := range ShoppingSummaryCounter(summary) {
+		fmt.Println(index, "=>", element)
+	}
+}
+
+func ShoppingSummaryCounter(str string) map[string]int {
+	var y []string
+	z := map[string]int{}
+	count := 0
+	a := ""
+	for i := 0; i < len(str); i++ {
+		if str[i] != ' ' {
+			a += string(str[i])
+		} else if str[i] == ' ' && str[i+1] == ' ' {
+			y = append(y, "")
+		} else {
+			if a != "" && a != " " && i < len(str) {
+				y = append(y, a)
+			}
+			a = ""
+		}
+	}
+	if a != "" {
+		y = append(y, a)
+	}
+	for i := 0; i < len(y); i++ {
+		for j := 0; j < len(y); j++ {
+			if y[i] == y[j] {
+				count++
+			}
+		}
+		z[y[i]] = count
+		count = 0
+	}
+	if z[""] == 1 {
+		z[""] = 2
+	}
+	return z
+}
+*/
+
+/* Q10-8
+const N = 6
+
+func main() {
+	a := make([]string, N)
+	a[0] = "a"
+	a[2] = "b"
+	a[4] = "c"
+
+	for _, v := range a {
+		fmt.Println(v)
+	}
+
+	fmt.Println("Size after compacting:", Compact(&a))
+
+	for _, v := range a {
+		fmt.Println(v)
+	}
+}
+
+func Compact(ptr *[]string) int {
+	res := []string{}
+	for _, c := range *ptr {
+		if c != "" {
+			res = append(res, c)
+		}
+	}
+	*ptr = res
+	return len(*ptr)
+}
+*/
+
+/* Q10-9
+func main() {
+	deck := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+	DealAPackOfCards(deck)
+}
+
+func Itoa(n int) string {
+	res := ""
+	signe := ""
+	if n < 0 {
+		signe = "-"
+		n = -n
+	}
+	if n == 0 {
+		res += "0"
+	}
+	for n != 0 {
+		res = string(rune(n%10)+'0') + res
+		n /= 10
+	}
+	return signe + res
+}
+
+func DealAPackOfCards(deck []int) {
+	res := ""
+	resFinal := []string{}
+	for i := 0; i < len(deck); i++ {
+		if i == 0 {
+			res += Itoa(deck[i]) + ", "
+		} else if i%3 != 0 && i != len(deck)-1 {
+			if (i+1)%3 == 0 {
+				res += Itoa(deck[i])
+			} else {
+				res += Itoa(deck[i]) + ", "
+			}
+		} else if i == len(deck)-1 {
+			if i%3 == 0 {
+				resFinal = append(resFinal, res)
+				res = ""
+				res += Itoa(deck[i])
+				resFinal = append(resFinal, res)
+			} else {
+				res += Itoa(deck[i])
+				resFinal = append(resFinal, res)
+			}
+		} else {
+			resFinal = append(resFinal, res)
+			res = ""
+			res += Itoa(deck[i]) + ", "
+		}
+	}
+	for i, c := range resFinal {
+		fmt.Printf("PLayer %d: %s", i+1, c)
+		fmt.Println()
+	}
+}
+*/
+
+/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
+/* Map / Split / Make */
