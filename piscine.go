@@ -1,5 +1,10 @@
 package main
 
+import (
+	"os"
+	"strconv"
+)
+
 //---------  Quest II  ---------//
 
 /* Q2-1
@@ -1161,4 +1166,109 @@ func Any(f func(string) bool, a []string) bool {
 }
 */
 
-/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 */
+/* Q9-4
+func main() {
+	tab1 := []string{"Hello", "how", "are", "you"}
+	tab2 := []string{"This", "1", "is", "4", "you"}
+	answer1 := CountIf(IsNumeric, tab1)
+	answer2 := CountIf(IsNumeric, tab2)
+	fmt.Println(answer1)
+	fmt.Println(answer2)
+}
+
+func IsNumeric(s string) bool {
+	for _, c := range s {
+		if c >= '0' && c <= '9' {
+			return true
+		}
+	}
+	return false
+}
+
+func CountIf(f func(string) bool, tab []string) int {
+	count := 0
+	for _, c := range tab {
+		if f(c) {
+			count++
+		}
+	}
+	return count
+}
+*/
+
+/* Q9-5
+func main() {
+	a1 := []int{0, 1, 2, 3, 4, 5}
+	a2 := []int{0, 2, 1, 3}
+
+	result1 := IsSorted(f, a1)
+	result2 := IsSorted(f, a2)
+
+	fmt.Println(result1)
+	fmt.Println(result2)
+}
+
+func f(n, nb int) int {
+	return n - nb
+}
+
+func IsSorted(f func(a, b int) int, a []int) bool {
+	if f(a[0], a[1]) > 0 {
+		for i := 1; i < len(a)-1; i++ {
+			if f(a[i], a[i+1]) < 0 {
+				return false
+			}
+		}
+	} else {
+		for i := 1; i < len(a)-1; i++ {
+			if f(a[i], a[i+1]) > 0 {
+				return false
+			}
+		}
+	}
+	return true
+}
+*/
+
+/* Q9-6
+func main() {
+	if len(os.Args) != 4 {
+		return
+	}
+	arg1, err1 := strconv.Atoi(os.Args[1])
+	arg2 := os.Args[2]
+	arg3, err3 := strconv.Atoi(os.Args[3])
+	resFinal := ""
+	if err1 != nil || err3 != nil {
+		return
+	}
+	if arg2 == "+" {
+		resFinal = strconv.Itoa(arg1 + arg3)
+	} else if arg2 == "-" {
+		resFinal = strconv.Itoa(arg1 - arg3)
+	} else if arg2 == "*" {
+		resFinal = strconv.Itoa(arg1 * arg3)
+	} else if arg2 == "/" {
+		if arg3 == 0 {
+			os.Stdout.WriteString("No division by 0")
+			return
+		}
+		resFinal = strconv.Itoa(arg1 - arg3)
+	} else if arg2 == "%" {
+		if arg3 == 0 {
+			os.Stdout.WriteString("No modulo by 0")
+			return
+		}
+		resFinal = strconv.Itoa(arg1 - arg3)
+	}
+	chek, _ := strconv.Atoi(resFinal)
+	if chek > 9223372036 || chek < -92233720368 {
+		return
+	}
+	os.Stdout.WriteString(resFinal)
+}
+*/
+
+
+
+/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
