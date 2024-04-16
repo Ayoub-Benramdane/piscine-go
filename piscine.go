@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //---------  Quest II  ---------//
 
@@ -1441,6 +1443,7 @@ func ShoppingSummaryCounter(str string) map[string]int {
 }
 */
 
+/* Q10-8
 const N = 6
 
 func main() {
@@ -1461,7 +1464,60 @@ func main() {
 }
 
 func Compact(ptr *[]string) int {
-	return 1
+	res := []string{}
+	for _, c := range *ptr {
+		if c != "" {
+			res = append(res, c)
+		}
+	}
+	*ptr = res
+	return len(res)
+}
+*/
+
+/* Q10-9
+func main() {
+	deck := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+	DealAPackOfCards(deck)
+}
+
+func DealAPackOfCards (deck []int) {
+	res := ""
+	resFinal := []string{}
+	for i := 0; i < len(deck); i++ {
+		if i == 0 {
+			res += strconv.Itoa(deck[i]) + ", "
+		} else if i == len(deck)-1 {
+			res += strconv.Itoa(deck[i])
+			resFinal = append(resFinal, res)
+		} else if i%3 != 0 {
+			if (i+1)%3 == 0 {
+				res += strconv.Itoa(deck[i])
+			} else {
+				res += strconv.Itoa(deck[i]) + ", "
+			}
+		} else {
+			resFinal = append(resFinal, res)
+			res = ""
+			res += strconv.Itoa(deck[i]) + ", "
+		}
+	}
+	for i, c := range resFinal {
+		fmt.Printf("Player %d: %s", i+1, c)
+		fmt.Println()
+	}
+}
+*/
+
+func main() {
+	fmt.Print(JumpOver("1010101010"))
+	fmt.Print(JumpOver(""))
+	fmt.Print(JumpOver("t w e l v e"))
+	fmt.Print(JumpOver("12"))
+}
+
+func JumpOver(str string) string {
+	return ""
 }
 
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
