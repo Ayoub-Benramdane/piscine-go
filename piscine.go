@@ -1509,6 +1509,7 @@ func DealAPackOfCards (deck []int) {
 }
 */
 
+/* Q10-10
 func main() {
 	fmt.Print(JumpOver("1010101010"))
 	fmt.Print(JumpOver(""))
@@ -1517,7 +1518,15 @@ func main() {
 }
 
 func JumpOver(str string) string {
-	return ""
+	res := ""
+	for i, c := range str {
+		if (i+1)%3 == 0 {
+			res += string(c)
+		}
+	}
+	res += "\n"
+	return res
 }
+*/
 
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
