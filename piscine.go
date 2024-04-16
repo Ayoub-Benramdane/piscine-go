@@ -1,9 +1,6 @@
 package main
 
-import (
-	"os"
-	"strconv"
-)
+import "fmt"
 
 //---------  Quest II  ---------//
 
@@ -1087,7 +1084,7 @@ func main() {
 }
 */
 
-//---------  Quest VIII  ---------//
+//---------  Quest IX  ---------//
 
 /* Q9-1
 func main() {
@@ -1269,6 +1266,202 @@ func main() {
 }
 */
 
+//---------  Quest X  ---------//
 
+/* Q10-1
+func main() {
+	result := Rot14("Hello! How are You?")
+
+	for _, r := range result {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
+}
+
+func Rot14(s string) string {
+	res := ""
+	for _, c := range s {
+		if c >= 'a' && c <= 'm' || c >= 'A' && c <= 'L' {
+			res += string(c + 14)
+		} else if c >= 'm' && c <= 'z' || c >= 'M' && c <= 'Z' {
+			res += string(c - 12)
+		} else {
+			res += string(c)
+		}
+	}
+	return res
+}
+*/
+
+/* Q10-2
+func main() {
+	DescendComb()
+}
+
+func DescendComb() {
+	for i := '9'; i >= '0'; i-- {
+		for j := '9'; j >= '0'; j-- {
+			for k := '9'; k >= '0'; k-- {
+				for l := '9'; l >= '0'; l-- {
+					if i >= k && j > l {
+						if i == '0' && j == '1' && k == '0' && l == '0' {
+							z01.PrintRune(i)
+							z01.PrintRune(j)
+							z01.PrintRune(' ')
+							z01.PrintRune(k)
+							z01.PrintRune(l)
+						} else {
+							z01.PrintRune(i)
+							z01.PrintRune(j)
+							z01.PrintRune(' ')
+							z01.PrintRune(k)
+							z01.PrintRune(l)
+							z01.PrintRune(',')
+							z01.PrintRune(' ')
+						}
+					}
+				}
+			}
+		}
+	}
+}
+*/
+
+/* Q10-3
+func main() {
+	a := []int{1, 2, 3, 1, 2, 3, 4}
+	unmatch := Unmatch(a)
+	fmt.Println(unmatch)
+}
+
+func Unmatch(a []int) int {
+	tab := [10]int{}
+	for i := 0; i < len(a); i++ {
+		for j := 0; j < len(a); j++ {
+			if a[i] == a[j] {
+				tab[a[i]]++
+			}
+		}
+	}
+	for i, c := range tab {
+		if c%2 != 0 {
+			return i
+		}
+	}
+	return -1
+}
+*/
+
+/* Q10-4
+func main() {
+	fmt.Println(FoodDeliveryTime("burger"))
+	fmt.Println(FoodDeliveryTime("chips"))
+	fmt.Println(FoodDeliveryTime("nuggets"))
+	fmt.Println(FoodDeliveryTime("burger") + FoodDeliveryTime("chips") + FoodDeliveryTime("nuggets"))
+}
+
+func FoodDeliveryTime(order string) int {
+	if order == "burger" {
+		return 15
+	} else if order == "chips" {
+		return 10
+	} else if order == "nuggets" {
+		return 12
+	} else {
+		return 404
+	}
+}
+*/
+
+/* Q10-5
+func main() {
+	steps := CollatzCountdown(12)
+	fmt.Println(steps)
+}
+
+func CollatzCountdown(start int) int {
+	count := 0
+	for start > 1 {
+		if start%2 == 0 {
+			start /= 2
+		} else if start%2 == 1 {
+			start = 3*start + 1
+		}
+		count++
+	}
+	return count
+}
+*/
+
+/* Q10-6
+func main() {
+	middle := Abort(2, 3, 8, 5, 7)
+	fmt.Println(middle)
+}
+
+func Abort(a, b, c, d, e int) int {
+	res := []int{a, b, c, d, e}
+	for i := 0; i < len(res)-1; i++ {
+		if res[i] > res[i+1] {
+			res[i], res[i+1] = res[i+1], res[i]
+			i=0
+		}
+	}
+	return res[2]
+}
+*/
+
+/* Q10-7
+func main() {
+	summary := "Burger Water            Carrot Coffee Water Water Chips Carrot Carrot Burger Carrot Water"
+	for index, element := range ShoppingSummaryCounter(summary) {
+		fmt.Println(index, "=>", element)
+	}
+}
+
+func ShoppingSummaryCounter(str string) map[string]int {
+	res := make(map[string]int)
+	word := ""
+	for i, c := range str {
+		if i == len(str)-1 {
+			word += string(c)
+			res[word]++
+		} else if c != ' ' {
+			word += string(c)
+		} else {
+			if word == "" {
+				res[word] = 2
+			} else {
+				res[word]++
+				word = ""
+			}
+		}
+	}
+	return res
+}
+*/
+
+const N = 6
+
+func main() {
+	a := make([]string, N)
+	a[0] = "a"
+	a[2] = "b"
+	a[4] = "c"
+
+	for _, v := range a {
+		fmt.Println(v)
+	}
+
+	fmt.Println("Size after compacting:", Compact(&a))
+
+	for _, v := range a {
+		fmt.Println(v)
+	}
+}
+
+func Compact(ptr *[]string) int {
+	return 1
+}
 
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
