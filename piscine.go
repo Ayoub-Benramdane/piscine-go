@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 //---------  Quest II  ---------//
 
@@ -1624,6 +1622,237 @@ func DescendAppendRange(max, min int) []int {
 }
 */
 
+/* Q10-15
+func main() {
+	slice := []string{"Pineapple", "Honey", "Mushroom", "Tea", "Pepper", "Milk"}
+	fmt.Println(ShoppingListSort(slice))
+}
 
+func ShoppingListSort(slice []string) []string {
+	for i := 0; i < len(slice); i++ {
+		for j := i + 1; j < len(slice); j++ {
+			if len(slice[i]) > len(slice[j]) {
+				slice[i], slice[j] = slice[j], slice[i]
+			}
+		}
+	}
+	return slice
+}
+*/
+
+/* Q10-16
+func main() {
+	for i := 0; i < len(os.Args); i++ {
+		if os.Args[i] == "01" || os.Args[i] == "galaxy" || os.Args[i] == "galaxy 01" {
+			fmt.Println("Alert!!!")
+		}
+	}
+}
+*/
+
+/* Q10-17
+func main() {
+	fmt.Println(ReverseMenuIndex([]string{"desserts", "mains", "drinks", "starters"}))
+}
+
+func ReverseMenuIndex(menu []string) []string {
+	res := []string{}
+	for i := len(menu) - 1; i >= 0; i-- {
+		res = append(res, menu[i])
+	}
+	return res
+}
+*/
+
+/* Q10-18
+func main() {
+
+	p4 := []string{"4th Place"}
+	p3 := []string{"3rd Place"}
+	p2 := []string{"2nd Place"}
+	p1 := []string{"1st Place"}
+
+	position := [][]string{p4, p3, p2, p1}
+	fmt.Println(PodiumPosition(position))
+}
+
+func PodiumPosition(podium [][]string) [][]string {
+	for i := 0; i < len(podium); i++ {
+		for j := i + 1; j < len(podium); j++ {
+			if podium[i][0] > podium[j][0] {
+				podium[i], podium[j] = podium[j], podium[i]
+			}
+		}
+	}
+	return podium
+}
+*/
+
+/* Q10-19
+func main() {
+	fmt.Println(ActiveBits(7))
+}
+
+func ActiveBits(n int) int {
+	count := 0
+	for n > 0 {
+		if n%2 == 1 {
+			count++
+		}
+		n /= 2
+	}
+	return count
+}
+*/
+
+/* Q10-20
+type Pilot struct {
+	Name     string
+	Life     float64
+	Age      int
+	Aircraft int
+}
+
+func main() {
+	var donnie Pilot
+	donnie.Name = "Donnie"
+	donnie.Life = 100.0
+	donnie.Age = 24
+	donnie.Aircraft = AIRCRAFT1
+
+	fmt.Println(donnie)
+}
+
+const AIRCRAFT1 = 1
+*/
+
+/* Q10-21
+type Door struct {
+	state string
+}
+
+func PrintStr(s string) {
+	for _, r := range s {
+		z01.PrintRune(r)
+	}
+	z01.PrintRune('\n')
+}
+
+func CloseDoor(ptrDoor *Door) {
+	PrintStr("Door Closing...")
+	ptrDoor.state = "CLOSE"
+}
+
+func OpenDoor(ptrDoor *Door) {
+	PrintStr("Door Opening...")
+	ptrDoor.state = "OPEN"
+}
+
+func IsDoorOpen(Door Door) bool {
+	PrintStr("is the Door opened ?")
+	z01.PrintRune('\n')
+	return Door.state == "OPEN"
+}
+
+func IsDoorClose(ptrDoor *Door) bool {
+	PrintStr("is the Door closed ?")
+	z01.PrintRune('\n')
+	return ptrDoor.state == "CLOSE"
+}
+
+func main() {
+	door := &Door{}
+
+	OpenDoor(door)
+	if IsDoorClose(door) {
+		OpenDoor(door)
+	}
+	if IsDoorOpen(*door) {
+		CloseDoor(door)
+	}
+	if door.state == "OPEN" {
+		CloseDoor(door)
+	}
+}
+*/
+
+/* Q10-22
+func main() {
+	a := []int{23, 123, 1, 11, 55, 93}
+	max := Max(a)
+	fmt.Println(max)
+}
+
+func Max(a []int) int {
+	if len(a) == 0 {
+		return 0
+	}
+	for i := 0; i < len(a); i++ {
+		for j := i + 1; j < len(a); j++ {
+			if a[i] > a[j] {
+				a[i], a[j] = a[j], a[i]
+			}
+		}
+	}
+	return a[len(a)-1]
+}
+*/
+
+/* Q10-23
+func main() {
+	fmt.Println(RockAndRoll(4))
+	fmt.Println(RockAndRoll(9))
+	fmt.Println(RockAndRoll(6))
+}
+
+func RockAndRoll(n int) string {
+	if n < 0 {
+		return "error: number is negative\n"
+	} else if n%2 == 0 && n%3 == 0 {
+		return "rock and roll\n"
+	} else if n%2 == 0 {
+		return "rock\n"
+	} else if n%3 == 0 {
+		return "roll\n"
+	}
+	return "error: non divisible\n"
+}
+*/
+
+/* Q10-24
+func main() {
+	fmt.Print(LoafOfBread("deliciousbread"))
+	fmt.Print(LoafOfBread("This is a loaf of bread"))
+	fmt.Print(LoafOfBread("loaf"))
+}
+
+func LoafOfBread(str string) string {
+	res := ""
+	resFinal := ""
+	for _, c := range str {
+		if c != ' ' {
+			res += string(c)
+		}
+	}
+	if len(res) < 5 {
+		return "Invalid Output\n"
+	}
+	count := 0
+	for _, c := range res {
+		if count == 5 {
+			resFinal += " "
+			count = 0
+			continue
+		} else {
+			resFinal += string(c)
+		}
+		count++
+	}
+	resFinal += "\n"
+	return resFinal
+}
+*/
 
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
+
+/* MAP / STRUCT / MAKE / OS.FUNCTION */
