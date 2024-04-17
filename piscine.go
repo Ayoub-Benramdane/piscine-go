@@ -1529,4 +1529,101 @@ func JumpOver(str string) string {
 }
 */
 
+/* Q10-11
+func main() {
+	fmt.Println(StringToIntSlice("A quick brown fox jumps over the lazy dog"))
+	fmt.Println(StringToIntSlice("Converted this string into an int"))
+	fmt.Println(StringToIntSlice("hello THERE"))
+}
+
+func StringToIntSlice(str string) []int {
+	res := []int{}
+	for _, c := range str {
+		res = append(res, int(c))
+	}
+	return res
+}
+*/
+
+/* Q10-12
+func main() {
+	toConcat := []string{"Hello!", " How", " are", " you?"}
+	fmt.Println(Join(toConcat, ":"))
+}
+
+func Join(strs []string, sep string) string {
+	res := ""
+	for i, c := range strs {
+		if i == len(strs)-1 {
+			res += c
+		} else  {
+			res += c + sep
+		}
+	}
+	return res
+}
+*/
+
+/* Q10-13
+func main() {
+	x := 5
+	y := &x
+	z := &y
+	a := &z
+
+	w := 2
+	b := &w
+
+	u := 7
+	e := &u
+	f := &e
+	g := &f
+	h := &g
+	i := &h
+	j := &i
+	c := &j
+
+	k := 6
+	l := &k
+	m := &l
+	n := &m
+	d := &n
+
+	fmt.Println(***a)
+	fmt.Println(*b)
+	fmt.Println(*******c)
+	fmt.Println(****d)
+
+	Enigma(a, b, c, d)
+
+	fmt.Println("After using Enigma")
+	fmt.Println(***a)
+	fmt.Println(*b)
+	fmt.Println(*******c)
+	fmt.Println(****d)
+
+}
+
+func Enigma(a ***int, b *int, c *******int, d ****int) {
+	***a, *b, *******c, ****d = *b, ****d, ***a, *******c
+}
+*/
+
+/* Q10-14
+func main() {
+	fmt.Println(DescendAppendRange(10, 5))
+	fmt.Println(DescendAppendRange(5, 10))
+}
+
+func DescendAppendRange(max, min int) []int {
+	res := []int{}
+	for i := max; i > min; i-- {
+		res = append(res, i)
+	}
+	return res
+}
+*/
+
+
+
 /* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
