@@ -14,8 +14,6 @@ func PrintCombN(n int) {
 	if n <= 0 || n >= 10 {
 		return
 	}
-
-	// Helper function to generate combinations
 	var generateComb func(current string, start int)
 	combinations := []string{}
 
@@ -28,10 +26,7 @@ func PrintCombN(n int) {
 			generateComb(current+string(rune('0'+i)), i+1)
 		}
 	}
-
 	generateComb("", 0)
-
-	// Print the combinations using z01.PrintRune
 	for i, comb := range combinations {
 		for _, char := range comb {
 			z01.PrintRune(char)
