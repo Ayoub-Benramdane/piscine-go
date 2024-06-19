@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 //---------  Quest II  ---------//
 
 /* Q2-1
@@ -129,6 +127,43 @@ func PrintNbr(n int) {
 	for i := len(res)-1; i >= 0 ; i-- {
 		z01.PrintRune(res[i])
 	}
+}
+*/
+
+/* Q2-8
+func main() {
+	PrintCombN(1)
+	PrintCombN(3)
+	PrintCombN(9)
+}
+
+func PrintCombN(n int) {
+	if n <= 0 || n >= 10 {
+		return
+	}
+	var generateComb func(current string, start int)
+	combinations := []string{}
+
+	generateComb = func(current string, start int) {
+		if len(current) == n {
+			combinations = append(combinations, current)
+			return
+		}
+		for i := start; i <= 9; i++ {
+			generateComb(current+string(rune('0'+i)), i+1)
+		}
+	}
+	generateComb("", 0)
+	for i, comb := range combinations {
+		for _, char := range comb {
+			z01.PrintRune(char)
+		}
+		if i < len(combinations)-1 {
+			z01.PrintRune(',')
+			z01.PrintRune(' ')
+		}
+	}
+	z01.PrintRune('\n')
 }
 */
 
@@ -320,6 +355,24 @@ func Atoi(s string) int {
 		}
 	}
 	return res * signe
+}
+*/
+
+/* Q3-12
+func main() {
+	s := []int{5, 4, 3, 2, 1, 0}
+	SortIntegerTable(s)
+	fmt.Println(s)
+}
+
+func SortIntegerTable(table []int) {
+	for i := 0; i < len(table); i++ {
+		for j := i; j < len(table); j++ {
+			if table[j] < table[i] {
+				table[j], table[i] = table[i], table[j]
+			}
+		}
+	}
 }
 */
 
@@ -830,6 +883,90 @@ func Join(strs []string, sep string) string {
 }
 */
 
+/* Q5-20
+func main() {
+	PrintNbrBase(125, "0123456789")
+	z01.PrintRune('\n')
+	PrintNbrBase(-125, "01")
+	z01.PrintRune('\n')
+	PrintNbrBase(125, "0123456789ABCDEF")
+	z01.PrintRune('\n')
+	PrintNbrBase(-125, "choumi")
+	z01.PrintRune('\n')
+	PrintNbrBase(125, "aa")
+	z01.PrintRune('\n')
+}
+
+func PrintNbrBase(nbr int, base string) {
+	for i := 0; i < len(base); i++ {
+		for j := i + 1; j < len(base); j++ {
+			if base[j] == base[i] {
+				z01.PrintRune('N')
+				z01.PrintRune('V')
+				return
+			}
+		}
+	}
+	str := ""
+	nb := nbr
+	if nbr < 0 {
+		nb = -nbr
+	}
+	for nb > 0 {
+		n := nb % len(base)
+		str = string(base[n]) + str
+		nb /= len(base)
+	}
+	if nbr < 0 {
+		str = "-" + str
+	}
+	for _, c := range str {
+		z01.PrintRune(c)
+	}
+}
+*/
+
+/* Q5-21
+func main() {
+	fmt.Println(AtoiBase("125", "0123456789"))
+	fmt.Println(AtoiBase("1111101", "01"))
+	fmt.Println(AtoiBase("7D", "0123456789ABCDEF"))
+	fmt.Println(AtoiBase("uoi", "choumi"))
+	fmt.Println(AtoiBase("bbbbbab", "-ab"))
+}
+
+func AtoiBase(s string, base string) int {
+	n := 0
+	nb := 0
+	for _, c := range base {
+		if (c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') {
+			return n
+		}
+	}
+	for i := len(s) - 1; i >= 0; i-- {
+		for j := 0; j < len(base); j++ {
+			if s[i] == base[j] {
+				n += j * Puissance(len(base), nb)
+				nb++
+			}
+		}
+	}
+	return n
+}
+
+func Puissance(base, nb int) int {
+	n := 1
+	if nb == 0 {
+		return n
+	}
+	for nb > 0 {
+		n *= base
+		nb--
+	}
+	return n
+}
+*/
+
 //---------  Quest VI  ---------//
 
 /* Q6-1
@@ -882,6 +1019,142 @@ func main() {
 		}
 		z01.PrintRune('\n')
 	}
+}
+*/
+
+/* Q6-5
+func main() {
+	args := os.Args[1:]
+	alpha := []byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
+	alpha1 := []byte{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
+	str := ""
+	if len(args) == 0 {
+		return
+	}
+	for i := 0; i < len(args); i++ {
+		if args[i] == "--upper" && i == 0 {
+			alpha = alpha1
+			continue
+		}
+		arg := atoi(args[i])
+		if arg < 0 || arg > len(alpha) {
+			str += " "
+			continue
+		}
+		str += string(alpha[arg])
+	}
+	for _, c := range str {
+		z01.PrintRune(c)
+	}
+}
+
+func atoi(arg string) int {
+	nb := 0
+	for _, c := range arg {
+		nb = nb*10 + int(c-'0')
+	}
+	return nb - 1
+}
+*/
+
+/* Q6-6
+func main() {
+	args := os.Args[1:]
+	if len(args) == 0 || args[0] == "-h" || args[0] == "--help" {
+		help()
+		return
+	}
+	str := ""
+	strInst := ""
+	order := false
+	for _, c := range args {
+		if len(c) > 1 && c[:1] == "-" {
+			if c == "--order" || c == "-o" {
+				order = true
+			} else if len(c) > 9 && c[:9] == "--insert=" {
+				strInst += c[9:]
+			} else if len(c) > 3 && c[:3] == "-i=" {
+				strInst += c[3:]
+			} else {
+				help()
+				return
+			}
+			continue
+		}
+		str += c
+	}
+	str += strInst
+	if order {
+		orderString(str)
+	} else {
+		fmt.Println(str)
+	}
+}
+
+func orderString(str string) {
+	runeStr := []rune(str)
+	for i := 0; i < len(runeStr); i++ {
+		for j := i + 1; j < len(runeStr); j++ {
+			if runeStr[i] > runeStr[j] {
+				runeStr[i], runeStr[j] = runeStr[j], runeStr[i]
+			}
+		}
+	}
+	newStr := string(runeStr)
+	fmt.Println(newStr)
+}
+
+func help() {
+	fmt.Println("--insert")
+	fmt.Println("-i")
+	fmt.Println("This flag inserts the string into the string passed as argument.")
+	fmt.Println("--order")
+	fmt.Println("-o")
+	fmt.Println("This flag will behave like a boolean, if it is called it will order the argument.")
+}
+*/
+
+/* Q6-7
+func main() {
+	args := os.Args[1:]
+	if len(args) == 0 {
+		fmt.Println()
+		return
+	}
+	str := ""
+	for i := 0; i < len(args); i++ {
+		if i == len(args)-1 {
+			str += args[i]
+			break
+		}
+		str += args[i] + " "
+	}
+	runeStr := []rune(str)
+	vowel := []rune{'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
+	depart := len(runeStr) - 1
+	for i := 0; i < len(runeStr); i++ {
+		for j := 0; j < len(vowel); j++ {
+			if vowel[j] == runeStr[i] && i < depart {
+				depart = mirror(runeStr, vowel, i, depart)
+				break
+			}
+		}
+	}
+	newStr := string(runeStr)
+	fmt.Println(newStr)
+}
+
+func mirror(runeStr, vowel []rune, indice, depart int) int {
+	for i := depart; i >= 0; i-- {
+		depart--
+		for j := 0; j < len(vowel); j++ {
+			if vowel[j] == runeStr[i] {
+				runeStr[i], runeStr[indice] = runeStr[indice], runeStr[i]
+				return depart
+			}
+		}
+	}
+	return depart
 }
 */
 
@@ -1001,23 +1274,239 @@ func main() {
 }
 
 func Split(s, sep string) []string {
-	res := []string{}
-	word := ""
+	str := ""
+	slice := []string{}
 	for i := 0; i < len(s); i++ {
-		if i+len(sep) >= len(s)-len(sep) && i < len(s) {
-			word += string(s[i])
-			if i == len(s)-1 {
-				res = append(res, word)
-			}
-		} else if s[i:i+len(sep)] != sep {
-			word += string(s[i])
-		} else {
-			res = append(res, word)
-			i += len(sep) -1
-			word = ""
+		if i == len(s)-1 {
+			str += string(s[i])
+			slice = append(slice, str)
+		}
+		if i+len(sep) < len(s) && s[i:i+len(sep)] == sep {
+			slice = append(slice, str)
+			str = ""
+			i += len(sep) - 1
+			continue
+		}
+		str += string(s[i])
+	}
+	return slice
+}
+*/
+
+/* Q7-7
+func main() {
+	result := ConvertBase("101011", "01", "0123456789")
+	fmt.Println(result)
+}
+
+func ConvertBase(nbr, baseFrom, baseTo string) string {
+	strFinal := ""
+	for _, c := range nbr {
+		if (c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') {
+			return ""
 		}
 	}
+	if len(baseTo) == 2 {
+		if len(baseFrom) == 10 {
+			strFinal = FromDec(nbr, baseTo)
+		} else if len(baseFrom) == 8 {
+			strFinal = OctToBin(nbr, baseFrom)
+		} else if len(baseFrom) == 16 {
+			strFinal = HexToBin(nbr, baseFrom)
+		}
+	} else if len(baseTo) == 8 {
+		if len(baseFrom) == 2 {
+			strFinal = BinToOct(nbr, baseFrom)
+		} else if len(baseFrom) == 10 {
+			strFinal = FromDec(nbr, baseTo)
+		} else if len(baseFrom) == 16 {
+			strFinal = HexToOct(nbr, baseFrom)
+		}
+	} else if len(baseTo) == 10 {
+		strFinal = toDecimal(nbr, baseFrom)
+	} else if len(baseTo) == 16 {
+		if len(baseFrom) == 2 {
+			strFinal = BinToHex(nbr, baseFrom)
+		} else if len(baseFrom) == 10 {
+			strFinal = FromDec(nbr, baseTo)
+		} else if len(baseFrom) == 8 {
+			strFinal = OctToHex(nbr, baseFrom)
+		}
+	} else {
+		return ""
+	}
+	return strFinal
+}
+
+func FromDec(nbr, baseTo string) string {
+	liste := []rune("0123456789abcdef")
+	str := ""
+	nb := atoi(nbr)
+	for nb > 0 {
+		str = string(liste[nb%len(baseTo)]) + str
+		nb /= len(baseTo)
+	}
+	return str
+}
+
+func atoi(arg string) int {
+	nb := 0
+	for _, c := range arg {
+		nb = nb*10 + int(c-'0')
+	}
+	return nb
+}
+
+func OctToBin(nbr, baseFrom string) string {
+	liste := []string{"000", "001", "010", "011", " 100", "101", "110", "111"}
+	str := ""
+	for i := 0; i < len(nbr); i++ {
+		for j := 0; j < len(baseFrom); j++ {
+			if nbr[i] == baseFrom[j] {
+				str += liste[j]
+				break
+			}
+		}
+	}
+	if str[0] == '0' {
+		str = CleanStr(str)
+	}
+	return str
+}
+
+func HexToBin(nbr, baseFrom string) string {
+	liste := []string{"0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"}
+	str := ""
+	for i := 0; i < len(nbr); i++ {
+		for j := 0; j < len(baseFrom); j++ {
+			if nbr[i] == baseFrom[j] {
+				str += liste[j]
+				break
+			}
+		}
+	}
+	if str[0] == '0' {
+		str = CleanStr(str)
+	}
+	return str
+}
+
+func BinToOct(nbr, baseFrom string) string {
+	liste := []string{"000", "001", "010", "011", "100", "101", "110", "111"}
+	liste1 := []rune("0123456789abcdef")
+	str := ""
+	indice := ""
+	for i := len(nbr) - 1; i >= 0; i-- {
+		indice = string(nbr[i]) + indice
+		if len(indice) == 3 || i == 0 {
+			if len(indice) == 1 && indice != "0" {
+				indice = "00" + indice
+			} else if len(indice) == 2 && indice != "00" {
+				indice = "0" + indice
+			}
+			for j, c := range liste {
+				if c == indice {
+					str = string(liste1[j]) + str
+				}
+			}
+			indice = ""
+		}
+	}
+	if str[0] == '0' {
+		str = CleanStr(str)
+	}
+	return str
+}
+
+func HexToOct(nbr, baseFrom string) string {
+	str := HexToBin(nbr, baseFrom)
+	str = BinToOct(str, "01")
+	return str
+}
+
+func toDecimal(nbr, baseFrom string) string {
+	n := 0
+	nb := len(nbr) - 1
+	for i := 0; i < len(nbr); i++ {
+		for j := 0; j < len(baseFrom); j++ {
+			if nbr[i] == baseFrom[j] {
+				n += j * Puissance(len(baseFrom), nb)
+				nb--
+				break
+			}
+		}
+	}
+	str := itoa(n)
+	return str
+}
+
+func Puissance(base, nb int) int {
+	n := 1
+	if nb == 0 {
+		return n
+	}
+	for nb > 0 {
+		n *= base
+		nb--
+	}
+	return n
+}
+
+func itoa(n int) string {
+	res := ""
+	if n == 0 {
+		res += "0"
+	}
+	for n != 0 {
+		res = string(n%10+'0') + res
+		n /= 10
+	}
 	return res
+}
+
+func BinToHex(nbr, baseFrom string) string {
+	liste := []string{"0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"}
+	liste1 := []rune("0123456789abcdef")
+	str := ""
+	indice := ""
+	for i := len(nbr) - 1; i >= 0; i-- {
+		indice = string(nbr[i]) + indice
+		if len(indice) == 4 || i == 0 {
+			if len(indice) == 1 && indice != "0" {
+				indice = "000" + indice
+			} else if len(indice) == 2 && indice != "00" {
+				indice = "00" + indice
+			} else if len(indice) == 3 && indice != "000" {
+				indice = "0" + indice
+			}
+			for j, c := range liste {
+				if c == indice {
+					str = string(liste1[j]) + str
+				}
+			}
+			indice = ""
+		}
+	}
+	if str[0] == '0' {
+		str = CleanStr(str)
+	}
+	return str
+}
+
+func OctToHex(nbr, baseFrom string) string {
+	str := OctToBin(nbr, baseFrom)
+	str = BinToHex(str, "01")
+	return str
+}
+
+func CleanStr(str string) string {
+	for i, c := range str {
+		if c != '0' {
+			str = str[i:]
+			break
+		}
+	}
+	return str
 }
 */
 
@@ -1081,6 +1570,33 @@ func main() {
 	}
 	content, _ := ioutil.ReadFile(os.Args[1])
 	fmt.Println(string(content))
+}
+*/
+
+/* Q8-4
+func printS(str string) {
+	for _, c := range str {
+		z01.PrintRune(c)
+	}
+}
+func main() {
+	if len(os.Args) == 1 {
+		io.Copy(os.Stdout, os.Stdin)
+	} else {
+		args := os.Args[1:]
+		for _, c := range args {
+			file, err := os.Open(c)
+			if err != nil {
+				printS("ERROR: ")
+				printS(err.Error())
+				z01.PrintRune('\n')
+				os.Exit(1)
+			}
+			arr, _ := io.ReadAll(file)
+			printS(string(arr))
+			file.Close()
+		}
+	}
 }
 */
 
@@ -1263,6 +1779,52 @@ func main() {
 		return
 	}
 	os.Stdout.WriteString(resFinal)
+}
+*/
+
+/* Q9-7
+func main() {
+	result := []string{"a", "A", "1", "b", "B", "2", "c", "C", "3"}
+	SortWordArr(result)
+
+	fmt.Println(result)
+}
+
+func SortWordArr(a []string) {
+	for i := 0; i < len(a); i++ {
+		for j := i + 1; j < len(a); j++ {
+			if a[j] < a[i] {
+				a[j], a[i] = a[i], a[j]
+			}
+		}
+	}
+}
+*/
+
+/* Q9-8
+func main() {
+	result := []string{"a", "A", "1", "b", "B", "2", "c", "C", "3"}
+	AdvancedSortWordArr(result, Compare)
+	fmt.Println(result)
+}
+
+func AdvancedSortWordArr(a []string, f func(a, b string) int) {
+	for i := 0; i < len(a); i++ {
+		for j := i + 1; j < len(a); j++ {
+			if Compare(a[j], a[i]) == -1 {
+				a[j], a[i] = a[i], a[j]
+			}
+		}
+	}
+}
+
+func Compare(a, b string) int {
+	if a == b {
+		return 0
+	} else if a > b {
+		return 1
+	}
+	return -1
 }
 */
 
@@ -1599,7 +2161,6 @@ func main() {
 	fmt.Println(*b)
 	fmt.Println(*******c)
 	fmt.Println(****d)
-
 }
 
 func Enigma(a ***int, b *int, c *******int, d ****int) {
@@ -1853,6 +2414,393 @@ func LoafOfBread(str string) string {
 }
 */
 
-/* Q2-8 / Q3-12 / Q4-9 / Q5-20 / Q5-21 / Q6-5 / Q6-6 / Q6-7 / Q7-7 / Q8-4 / Q8-5 / Q9-7 / Q9-8 */
+//---------  Quest XI  ---------//
+
+/* Q11-1
+func main() {
+
+	link := &List{}
+
+	ListPushBack(link, "Hello")
+	ListPushBack(link, "man")
+	ListPushBack(link, "how are you")
+
+	for link.Head != nil {
+		fmt.Println(link.Head.Data)
+		link.Head = link.Head.Next
+	}
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+
+func ListPushBack(l *List, data interface{}) {
+	Node := &NodeL{Data: data, Next: nil}
+	if l.Head == nil {
+		l.Head = Node
+		l.Tail = Node
+	} else {
+		l.Tail.Next = Node
+		l.Tail = Node
+	}
+}
+*/
+
+/* Q11-2
+func main() {
+
+	link := &List{}
+
+	ListPushFront(link, "Hello")
+	ListPushFront(link, "man")
+	ListPushFront(link, "how are you")
+
+	it := link.Head
+	for it != nil {
+		fmt.Print(it.Data, " ")
+		it = it.Next
+	}
+	fmt.Println()
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+
+func ListPushFront(l *List, data interface{}) {
+	Node := &NodeL{Data: data, Next: nil}
+	if l.Head == nil {
+		l.Head = Node
+		l.Tail = Node
+	} else {
+		Node.Next = l.Head
+		l.Head = Node
+	}
+}
+*/
+
+/* Q11-3
+func main() {
+	link := &List{}
+
+	ListPushFront(link, "Hello")
+	ListPushFront(link, "2")
+	ListPushFront(link, "you")
+	ListPushFront(link, "man")
+
+	fmt.Println(ListSize(link))
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+func ListSize(l *List) int {
+	count := 0
+	for l.Head != nil {
+		count++
+		l.Head = l.Head.Next
+	}
+	return count
+}
+*/
+
+/* Q11-4
+func main() {
+	link := &List{}
+	link2 := &List{}
+
+	ListPushBack(link, "three")
+	ListPushBack(link, 3)
+	ListPushBack(link, "1")
+
+	fmt.Println(ListLast(link))
+	fmt.Println(ListLast(link2))
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+
+func ListLast(l *List) interface{} {
+	if l.Head == nil {
+		return nil
+	}
+	for l.Head.Next != nil {
+		l.Head = l.Head.Next
+	}
+	return l.Head.Data
+}
+*/
+
+/* Q11-5
+type List = List
+type Node = NodeL
+
+func PrintList(l *List) {
+	link := l.Head
+	for link != nil {
+		fmt.Print(link.Data, " -> ")
+		link = link.Next
+	}
+	fmt.Println(nil)
+}
+
+func main() {
+	link := &List{}
+
+	ListPushBack(link, "I")
+	ListPushBack(link, 1)
+	ListPushBack(link, "something")
+	ListPushBack(link, 2)
+
+	fmt.Println("------list------")
+	PrintList(link)
+	ListClear(link)
+	fmt.Println("------updated list------")
+	PrintList(link)
+}
+
+func ListClear(l *List) {
+	l.Head = nil
+}
+*/
+
+/* Q11-6
+func main() {
+	link := &piscine.List{}
+
+	piscine.ListPushBack(link, "hello")
+	piscine.ListPushBack(link, "how are")
+	piscine.ListPushBack(link, "you")
+	piscine.ListPushBack(link, 1)
+
+	fmt.Println(piscine.ListAt(link.Head, 3).Data)
+	fmt.Println(piscine.ListAt(link.Head, 1).Data)
+	fmt.Println(piscine.ListAt(link.Head, 7))
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+func ListAt(l *NodeL, pos int) *NodeL {
+	if l == nil {
+		return nil
+	}
+	for i := 0; i < pos; i++ {
+		if l.Next == nil {
+			return nil
+		}
+		l = l.Next
+	}
+	return l
+}
+*/
+
+/* Q11-7
+func main() {
+	link := &piscine.List{}
+
+	piscine.ListPushBack(link, 1)
+	piscine.ListPushBack(link, 2)
+	piscine.ListPushBack(link, 3)
+	piscine.ListPushBack(link, 4)
+
+	piscine.ListReverse(link)
+
+	it := link.Head
+
+	for it != nil {
+		fmt.Println(it.Data)
+		it = it.Next
+	}
+
+	fmt.Println("Tail", link.Tail)
+	fmt.Println("Head", link.Head)
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+
+func ListReverse(l *List) {
+	var prev, current *NodeL
+	current = l.Head
+	l.Tail = l.Head
+	for current != nil {
+		prev, current, current.Next = current, current.Next, prev
+	}
+	l.Head = prev
+}
+*/
+
+/* Q11-8
+func main() {
+	link := &piscine.List{}
+
+	piscine.ListPushBack(link, "1")
+	piscine.ListPushBack(link, "2")
+	piscine.ListPushBack(link, "3")
+	piscine.ListPushBack(link, "5")
+
+	piscine.ListForEach(link, piscine.Add2_node)
+
+	it := link.Head
+	for it != nil {
+		fmt.Println(it.Data)
+		it = it.Next
+	}
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+
+func ListForEach(l *List, f func(*NodeL)) {
+	current := l.Head
+	for current != nil {
+		f(current)
+		current = current.Next
+	}
+}
+
+func Add2_node(node *NodeL) {
+	switch node.Data.(type) {
+	case int:
+		node.Data = node.Data.(int) + 2
+	case string:
+		node.Data = node.Data.(string) + "2"
+	}
+}
+
+func Subtract3_node(node *NodeL) {
+	switch node.Data.(type) {
+	case int:
+		node.Data = node.Data.(int) - 3
+	case string:
+		node.Data = node.Data.(string) + "-3"
+	}
+}
+*/
+
+/* Q11-9
+func PrintElem(node *piscine.NodeL) {
+	fmt.Println(node.Data)
+}
+
+func StringToInt(node *piscine.NodeL) {
+	node.Data = 2
+}
+
+func PrintList(l *piscine.List) {
+	it := l.Head
+	for it != nil {
+		fmt.Print(it.Data, "->")
+		it = it.Next
+	}
+	fmt.Print("nil","\n")
+}
+
+func main() {
+	link := &piscine.List{}
+
+	piscine.ListPushBack(link, 1)
+	piscine.ListPushBack(link, "hello")
+	piscine.ListPushBack(link, 3)
+	piscine.ListPushBack(link, "there")
+	piscine.ListPushBack(link, 23)
+	piscine.ListPushBack(link, "!")
+	piscine.ListPushBack(link, 54)
+
+	PrintList(link)
+
+	fmt.Println("--------function applied--------")
+	piscine.ListForEachIf(link, PrintElem, piscine.IsPositiveNode)
+
+	piscine.ListForEachIf(link, StringToInt, piscine.IsAlNode)
+
+	fmt.Println("--------function applied--------")
+	PrintList(link)
+
+	fmt.Println()
+}
+
+type NodeL struct {
+	Data interface{}
+	Next *NodeL
+}
+
+type List struct {
+	Head *NodeL
+	Tail *NodeL
+}
+
+func IsPositiveNode(node *NodeL) bool {
+	switch node.Data.(type) {
+	case int, float32, float64, byte:
+		return node.Data.(int) > 0
+	default:
+		return false
+	}
+}
+
+func IsAlNode(node *NodeL) bool {
+	switch node.Data.(type) {
+	case int, float32, float64, byte:
+		return false
+	default:
+		return true
+	}
+}
+
+func ListForEachIf(l *List, f func(*NodeL), cond func(*NodeL) bool) {
+	it := l.Head
+	for it != nil {
+		if cond(it) {
+			f(it)
+		}
+		it = it.Next
+	}
+}
+*/
+
+/* Q4-9 / Q8-5 / Q11-10 / Q11-11 / Q11-12 / Q11-13 / Q11-14 / Q11-15 */
 
 /* MAP / STRUCT / MAKE / OS.FUNCTION */
