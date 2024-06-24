@@ -44,12 +44,18 @@ type NodeI struct {
 	Next *NodeI
 }
 
+var V = 0
+
 func ListSort(l *NodeI) *NodeI {
-	if l.Data > l.Next.Data {
-		fmt.Println(l.Data, l.Next.Data)
-		l, l.Next = l.Next, l
-		fmt.Println(l.Data, l.Next.Data)
-		ListSort(l)
+	it := l
+	for it.Next != nil {
+		if it.Data > it.Next.Data {
+			it, it.Next = it.Next, it
+			fmt.Println(it.Data, it.Next.Data)
+			it = it.Next
+			fmt.Println(it.Data, it.Next.Data)
+			ListSort(it)
+		}
 	}
 	return l
 }
