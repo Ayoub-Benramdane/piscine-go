@@ -1,24 +1,27 @@
-package piscine
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println(Capitalize("Hello! How aAe you? How+are+things+4you?"))
+}
+
+func check(a rune) bool {
+	return (a < '0' || (a > '9' && a < 'A') || (a > 'Z' && a < 'a') || a > 'z')
+}
 
 func Capitalize(s string) string {
-	result := ""
-	isFirst := true
-	for i := 0; i < len(s); i++ {
-		if isFirst {
-			if s[i] >= 'a' && s[i] <= 'z' {
-				result += string(s[i] - 32)
-			} else {
-				result += string(s[i])
-			}
-			isFirst = false
-		} else if s[i] >= 'A' && s[i] <= 'Z' {
-			result += string(s[i] + 32)
-		} else {
-			result += string(s[i])
-		}
-		if s[i] < '0' || (s[i] > '9' && s[i] < 'A') || (s[i] > 'Z' && s[i] < 'a') || s[i] > 'z' {
-			isFirst = true
+	runes := []rune(s)
+	for i := range runes {
+		if runes[0] >= 'a' && runes[0] <= 'z' {
+			runes[0] -= 32
+		} else if i > 0 && check(runes[i-1]) && runes[i] >= 'a' && runes[i] <= 'z' {
+			runes[i] -= 32
+		} else if i > 0 && !check(runes[i-1]) && runes[i] >= 'A' && runes[i] <= 'Z' {
+			runes[i] += 32
 		}
 	}
-	return result
+	return string(runes)
 }
