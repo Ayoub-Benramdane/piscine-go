@@ -1,6 +1,6 @@
 package piscine
 
-func check(a rune) bool {
+func isAlphaNum(a rune) bool {
 	return (a < '0' || (a > '9' && a < 'A') || (a > 'Z' && a < 'a') || a > 'z')
 }
 
@@ -9,9 +9,9 @@ func Capitalize(s string) string {
 	for i := range runes {
 		if runes[0] >= 'a' && runes[0] <= 'z' {
 			runes[0] -= 32
-		} else if i > 0 && check(runes[i-1]) && runes[i] >= 'a' && runes[i] <= 'z' {
+		} else if i > 0 && isAlphaNum(runes[i-1]) && runes[i] >= 'a' && runes[i] <= 'z' {
 			runes[i] -= 32
-		} else if i > 0 && !check(runes[i-1]) && runes[i] >= 'A' && runes[i] <= 'Z' {
+		} else if i > 0 && !isAlphaNum(runes[i-1]) && runes[i] >= 'A' && runes[i] <= 'Z' {
 			runes[i] += 32
 		}
 	}
