@@ -1,12 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
-
-func main() {
-	fmt.Println(Capitalize("Hello! How aAe you? How+are+things+4you?"))
-}
+package piscine
 
 func check(a rune) bool {
 	return (a < '0' || (a > '9' && a < 'A') || (a > 'Z' && a < 'a') || a > 'z')
