@@ -3,10 +3,8 @@ package piscine
 func AtoiBase(s string, base string) int {
 	n := 0
 	nb := 0
-	for _, c := range base {
-		if (c < '0' || c > '9') && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') {
-			return n
-		}
+	if len(base) < 2 || handlingError(base) {
+		return 0
 	}
 	for i := len(s) - 1; i >= 0; i-- {
 		for j := 0; j < len(base); j++ {
@@ -17,6 +15,17 @@ func AtoiBase(s string, base string) int {
 		}
 	}
 	return n
+}
+
+func handlingError(base string) bool {
+	for i := 0; i < len(base); i++ {
+		for j := i + 1; j < len(base); j++ {
+			if base[j] == base[i] || base[i] == '-' || base[i] == '+' || base[j] == '-' || base[j] == '+' {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 func Puissance(base, nb int) int {

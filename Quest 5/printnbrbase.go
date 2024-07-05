@@ -5,7 +5,9 @@ import "github.com/01-edu/z01"
 func PrintNbrBase(nbr int, base string) {
 	str := ""
 	strFinal := ""
-	if handlingError(base) {
+	if len(base) < 2 || handlingError(base) {
+		z01.PrintRune('N')
+		z01.PrintRune('V')
 		return
 	}
 	if nbr < 0 {
@@ -23,16 +25,9 @@ func PrintNbrBase(nbr int, base string) {
 }
 
 func handlingError(base string) bool {
-	if len(base) < 2 {
-		z01.PrintRune('N')
-		z01.PrintRune('V')
-		return true
-	}
 	for i := 0; i < len(base); i++ {
 		for j := i + 1; j < len(base); j++ {
-			if base[j] == base[i] || base[j] == '-' || base[j] == '+' {
-				z01.PrintRune('N')
-				z01.PrintRune('V')
+			if base[j] == base[i] || base[i] == '-' || base[i] == '+' || base[j] == '-' || base[j] == '+' {
 				return true
 			}
 		}
