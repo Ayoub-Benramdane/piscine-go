@@ -11,6 +11,9 @@ func AtoiBase(s string, base string) int {
 			if s[i] == base[j] {
 				n += j * Puissance(len(base), nb)
 				nb++
+				break
+			} else if j == len(base)-1 && base[j] != s[i] {
+				return 0
 			}
 		}
 	}
@@ -22,7 +25,7 @@ func handlingError(base string) bool {
 		for j := i + 1; j < len(base); j++ {
 			if base[j] == base[i] || base[i] == '-' || base[i] == '+' || base[j] == '-' || base[j] == '+' {
 				return true
-			}
+			} 
 		}
 	}
 	return false
