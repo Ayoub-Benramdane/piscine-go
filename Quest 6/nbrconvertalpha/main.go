@@ -8,27 +8,27 @@ import (
 
 func main() {
 	args := os.Args[1:]
-	alpha := []byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
-	alpha1 := []byte{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
+	character := 96
 	str := ""
 	if len(args) == 0 {
 		return
 	}
 	for i := 0; i < len(args); i++ {
-		if args[i] == "--upper" && i == 0 {
-			alpha = alpha1
+		if i == 0 && args[i] == "--upper" {
+			character -= 32
 			continue
 		}
-		arg := atoi(args[i])
-		if arg < 0 || arg > len(alpha) {
+		num := atoi(args[i])
+		if num < 1 || num > 26 {
 			str += " "
-			continue
+		} else {
+			str += string(character + num)
 		}
-		str += string(alpha[arg])
 	}
 	for _, c := range str {
 		z01.PrintRune(c)
 	}
+	z01.PrintRune('\n')
 }
 
 func atoi(arg string) int {
@@ -36,5 +36,5 @@ func atoi(arg string) int {
 	for _, c := range arg {
 		nb = nb*10 + int(c-'0')
 	}
-	return nb - 1
+	return nb
 }
