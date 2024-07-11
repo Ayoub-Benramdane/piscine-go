@@ -11,6 +11,7 @@ func main() {
 	for i := 0; i < len(arg); i++ {
 		if i < len(arg)-1 && arg[i+1] < arg[i] {
 			arg[i], arg[i+1] = arg[i+1], arg[i]
+			i = 0
 		}
 	}
 	for _, v := range arg {
