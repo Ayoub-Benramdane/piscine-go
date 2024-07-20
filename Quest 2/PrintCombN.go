@@ -1,14 +1,8 @@
-package main
+package piscine
 
 import (
 	"github.com/01-edu/z01"
 )
-
-func main() {
-	PrintCombN(1)
-	PrintCombN(3)
-	PrintCombN(9)
-}
 
 func PrintCombN(n int) {
 	if n <= 0 || n >= 10 {
