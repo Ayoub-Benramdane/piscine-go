@@ -2,25 +2,22 @@ package piscine
 
 import "github.com/01-edu/z01"
 
-func check(x int) {
-	y := '0'
-	if x == 0 {
-		z01.PrintRune(y)
-		return
-	}
-	for i := 1; i <= (x % 10); i++ {
-		y++
-	}
-	if x/10 != 0 {
-		check(x / 10)
-	}
-	z01.PrintRune(y)
-}
-
 func PrintNbr(n int) {
+	str := ""
+	resFinal := ""
 	if n < 0 {
-		z01.PrintRune('-')
 		n = -n
+		str = "-"
+	} else if n == 0 {
+		resFinal += "0"
 	}
-	check(n)
+	for n > 0 {
+		nb := n % 10
+		resFinal += string(rune(nb + '0'))
+		n /= 10
+	}
+	resFinal += str
+	for i := len(resFinal) - 1; i >= 0; i-- {
+		z01.PrintRune(rune(resFinal[i]))
+	}
 }
