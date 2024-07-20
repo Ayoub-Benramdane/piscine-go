@@ -22,10 +22,13 @@ func AtoiBase(s string, base string) int {
 
 func handlingError(base string) bool {
 	for i := 0; i < len(base); i++ {
+		if base[i] == '-' || base[i] == '+' {
+			return true
+		}
 		for j := i + 1; j < len(base); j++ {
-			if base[j] == base[i] || base[i] == '-' || base[i] == '+' || base[j] == '-' || base[j] == '+' {
+			if base[j] == base[i] {
 				return true
-			} 
+			}
 		}
 	}
 	return false
@@ -33,9 +36,6 @@ func handlingError(base string) bool {
 
 func Puissance(base, nb int) int {
 	n := 1
-	if nb == 0 {
-		return n
-	}
 	for nb > 0 {
 		n *= base
 		nb--

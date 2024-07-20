@@ -41,21 +41,19 @@ func main() {
 func orderString(str string) {
 	runeStr := []rune(str)
 	for i := 0; i < len(runeStr); i++ {
-		for j := i + 1; j < len(runeStr); j++ {
-			if runeStr[i] > runeStr[j] {
-				runeStr[i], runeStr[j] = runeStr[j], runeStr[i]
-			}
+		if i < len(runeStr)-1 && runeStr[i] > runeStr[i+1] {
+			runeStr[i], runeStr[i+1] = runeStr[i+1], runeStr[i]
+			i = -1
 		}
 	}
-	newStr := string(runeStr)
-	fmt.Println(newStr)
+	fmt.Println(string(runeStr))
 }
 
 func help() {
 	fmt.Println("--insert")
-	fmt.Println("-i")
-	fmt.Println("This flag inserts the string into the string passed as argument.")
+	fmt.Println("  -i")
+	fmt.Println("         This flag inserts the string into the string passed as argument.")
 	fmt.Println("--order")
-	fmt.Println("-o")
-	fmt.Println("This flag will behave like a boolean, if it is called it will order the argument.")
+	fmt.Println("  -o")
+	fmt.Println("         This flag will behave like a boolean, if it is called it will order the argument.")
 }

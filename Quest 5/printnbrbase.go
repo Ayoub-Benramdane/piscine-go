@@ -26,8 +26,11 @@ func PrintNbrBase(nbr int, base string) {
 
 func handlingError(base string) bool {
 	for i := 0; i < len(base); i++ {
+		if base[i] == '-' || base[i] == '+' {
+			return true
+		}
 		for j := i + 1; j < len(base); j++ {
-			if base[j] == base[i] || base[i] == '-' || base[i] == '+' || base[j] == '-' || base[j] == '+' {
+			if base[j] == base[i] {
 				return true
 			}
 		}
