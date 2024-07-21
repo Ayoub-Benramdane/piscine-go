@@ -1,0 +1,37 @@
+
+rm              remove
+
+cd      	    enter in repo
+
+nano        	edit file
+
+ls              show
+
+touch           create file
+
+touch (-d)      date file/repo          95-05-01 --> 1995-05-01 00:00
+
+touch (-t)      date/hour file/repo     199505010002 --> 1995-05-01 00:02
+
+touch (-mht)    date/hour lien          199505010002 --> 1995-05-01 00:02
+
+mkdir           create repo
+
+ln -s           create lien
+
+chmod           permission (r4 w2 x1)
+
+tar -cf         compression file
+
+curl            import lien
+
+curl -s         import lien without download it
+
+jq              kt7dedlha chnu baghe tjbd mn lien
+
+ls -t           ktliste b time
+
+ls -m           kder binhom "comma"
+
+ls -p           kder "/" f le5er dial repo
+             

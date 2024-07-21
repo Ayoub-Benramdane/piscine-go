@@ -3,10 +3,9 @@ package piscine
 func Abort(a, b, c, d, e int) int {
 	x := []int{a, b, c, d, e}
 	for i := 0; i < len(x); i++ {
-		for j := 0; j < len(x); j++ {
-			if x[i] > x[j] {
-				x[i], x[j] = x[j], x[i]
-			}
+		if i < len(x)-1 && x[i] > x[i+1] {
+			x[i], x[i+1] = x[i+1], x[i]
+			i = -1
 		}
 	}
 	return x[2]

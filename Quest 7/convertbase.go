@@ -9,6 +9,7 @@ func ConvertBase(nbr, baseFrom, baseTo string) string {
 		for i, x := range baseFrom {
 			if v == x {
 				in = i
+				break
 			}
 		}
 		n = n*len(baseFrom) + in

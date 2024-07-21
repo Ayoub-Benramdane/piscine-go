@@ -11,7 +11,6 @@ func DealAPackOfCards(deck []int) {
 		player := i + 1
 		start := i * 3
 		end := (i + 1) * 3
-
 		fmt.Printf("Player %d: ", player)
 		for j := start; j < end; j++ {
 			if j < end-1 {

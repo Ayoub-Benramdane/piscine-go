@@ -2,10 +2,9 @@ package piscine
 
 func AdvancedSortWordArr(a []string, f func(a, b string) int) {
 	for i := 0; i < len(a); i++ {
-		for j := i + 1; j < len(a); j++ {
-			if Compare(a[j], a[i]) == -1 {
-				a[j], a[i] = a[i], a[j]
-			}
+		if i < len(a)-1 && Compare(a[i+1], a[i]) == -1 {
+			a[i+1], a[i] = a[i], a[i+1]
+			i = -1
 		}
 	}
 }
